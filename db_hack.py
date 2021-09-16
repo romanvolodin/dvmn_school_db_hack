@@ -1,7 +1,5 @@
 from random import choice
 
-from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
-
 from datacenter.models import (Chastisement, Commendation, Lesson, Mark,
                                Schoolkid)
 
@@ -9,9 +7,9 @@ from datacenter.models import (Chastisement, Commendation, Lesson, Mark,
 def get_schoolkid(name):
     try:
         return Schoolkid.objects.filter(full_name__contains=name).get()
-    except ObjectDoesNotExist:
+    except Schoolkid.DoesNotExist:
         print("Ученик с таким именем не найден.")
-    except MultipleObjectsReturned:
+    except Schoolkid.MultipleObjectsReturned:
         print(
             "Учеников с таким именем слишком много.",
             "Попробуйте добавить фамилию или отчество."
