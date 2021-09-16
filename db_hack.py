@@ -9,8 +9,13 @@ from datacenter.models import (Chastisement, Commendation, Lesson, Mark,
 def get_schoolkid(name):
     try:
         return Schoolkid.objects.filter(full_name__contains=name).get()
-    except (ObjectDoesNotExist, MultipleObjectsReturned) as error:
-        print(error)
+    except ObjectDoesNotExist:
+        print("Ученик с таким именем не найден.")
+    except MultipleObjectsReturned:
+        print(
+            "Учеников с таким именем слишком много.",
+            "Попробуйте добавить фамилию или отчество."
+        )
 
 
 def fix_marks(schoolkid):
@@ -44,6 +49,13 @@ def create_commendation(schoolkid, subject_title):
         group_letter=schoolkid.group_letter,
         subject__title=subject_title
     )
+    if not lessons:
+        print(
+            f"Уроков по предмету '{subject_title}' не найдено.",
+            "Проверьте название предмета.",
+            "Название должно быть с заглавной буквы.",
+        )
+        return
     random_lesson = choice(lessons)
     commendation = Commendation.objects.create(
         text=choice(commendation_texts),
