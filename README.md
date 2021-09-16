@@ -36,10 +36,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 Теперь можно найти ученика, которому будем исправлять оценки. Если никого не найдено или найдено слишком много учеников скрипт сообщит. В случае удачного выполнения скрипт ничего не выводит:
 ```python
 >>> schollkid = db_hack.get_schoolkid("Йохан")
-Schoolkid matching query does not exist.
+Ученик с таким именем не найден.
 
->>> schollkid = db_hack.get_schoolkid("Степан")
-get() returned more than one Schoolkid -- it returned 22!
+>>> schollkid = db_hack.get_schoolkid("Иван")
+Учеников с таким именем слишком много. Попробуйте добавить фамилию или отчество.
 
 >>> schollkid = db_hack.get_schoolkid("Фролов Иван")
 ```
